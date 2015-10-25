@@ -28,15 +28,18 @@ namespace LyncAvailability
                 //Console.WriteLine("starting...");
                 _uri = email;
                 _client = Microsoft.Lync.Model.LyncClient.GetClient();
-                _client.ContactManager.BeginSearch(
-                    _uri,
-                    SearchProviders.GlobalAddressList,
-                    SearchFields.EmailAddresses,
-                    SearchOptions.IncludeContactsWithoutSipOrTelUri,
-                    2,
-                    BeginSearchCallback,
-                    new object[] { _client.ContactManager, _uri }
-                );
+
+                _client.ContactManager.BeginSearch(_uri, BeginSearchCallback, new object[] { _client.ContactManager, _uri });
+
+                //_client.ContactManager.BeginSearch(
+                //    _uri,
+                //    SearchProviders.GlobalAddressList,
+                //    SearchFields.EmailAddresses,
+                //    SearchOptions.IncludeContactsWithoutSipOrTelUri,
+                //    2,
+                //    BeginSearchCallback,
+                //    new object[] { _client.ContactManager, _uri }
+                //);
             }
             catch(Microsoft.Lync.Model.NotSignedInException)
             {
