@@ -60,12 +60,11 @@ namespace LyncAvailability
             try
             {
                 DateTime idleSince = ((DateTime)contact.GetContactInformation(ContactInformationType.IdleStartTime)).ToLocalTime();
-                string timeElapsed = TimeHelper.DisplayTimeAgo(idleSince);
-                return (Resources.LastSeen + timeElapsed);
+                return TimeHelper.DisplayTimeAgo(idleSince);
             }
             catch
             {
-                return "";
+                return "N/A";
             }
         }
 
@@ -94,7 +93,9 @@ namespace LyncAvailability
 
                     //todo: check idle time without hanging
                     string timeElapsed = GetElapsedIdleTime(contact);
-                    Console.Write(availability.ToString() + " (" + contact.GetContactInformation(ContactInformationType.Availability).ToString() + ")" + timeElapsed);
+                    string userStatus = availability.ToString();
+                    string statusCode = contact.GetContactInformation(ContactInformationType.Availability).ToString();
+                    Console.Write(String.Format("Status: {0}, Code: {1}, Last seen: {2}", userStatus, statusCode, timeElapsed));
                     
                     //http://rcosic.wordpress.com/2011/11/17/availability-presence-in-lync-client/
                     //Invalid (-1),

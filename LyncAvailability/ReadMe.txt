@@ -28,6 +28,6 @@ Delete your 'sip' folder from
 
 ***
 
-Problem: Application hands
+Problem: Application hangs
 
 Solution: Stop trying to get the elapsed time (GetElapsedIdleTime)
